@@ -93,13 +93,6 @@ The receiver ESP32, with another NRF24L01+, listens on the same address. When da
 
 ---
 
-## 📸 Images
-![Transmitter Build](images/transmitter.jpg)
-![Receiver Build](images/receiver.jpg)
-![Wiring Diagram](images/wiring_diagram.png)
-
----
-
 ## 💻 Code
 - **Transmitter code:** `Transmitter_Code/transmitter.ino`  
 - **Receiver code:** `Receiver_Code/receiver.ino`  
