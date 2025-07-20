@@ -1,1 +1,54 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+#include <Servo.h>
 
+RF24 radio(5, 17);  // CE, CSN
+
+const byte address[6] = "00001";
+
+struct JoystickData {
+  int joy1X;
+  int joy1Y;
+  int joy2X;
+  int joy2Y;
+};
+
+JoystickData data;
+
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+
+void setup() {
+  Serial.begin(115200);
+  radio.begin();
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setDataRate(RF24_250KBPS);
+  radio.setChannel(108);
+  radio.openReadingPipe(1, address);
+  radio.startListening();
+
+  servo1.attach(21);
+  servo2.attach(22);
+  servo3.attach(25);
+  servo4.attach(26);
+}
+
+void loop() {
+  if (radio.available()) {
+    radio.read(&data, sizeof(data));
+
+    // Map analog values (0–4095) to servo angles (0–180)
+    int s1 = map(data.joy1X, 0, 4095, 0, 180);
+    int s2 = map(data.joy1Y, 0, 4095, 0, 180);
+    int s3 = map(data.joy2X, 0, 4095, 0, 180);
+    int s4 = map(data.joy2Y, 0, 4095, 0, 180);
+
+    servo1.write(s1);
+    servo2.write(s2);
+    servo3.write(s3);
+    servo4.write(s4);
+  }
+}
