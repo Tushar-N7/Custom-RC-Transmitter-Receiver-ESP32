@@ -93,15 +93,6 @@ The receiver ESP32, with another NRF24L01+, listens on the same address. When da
 
 ---
 
-## 💻 Code
-- **Transmitter code:** `Transmitter_Code/transmitter.ino`  
-- **Receiver code:** `Receiver_Code/receiver.ino`  
-
-The transmitter reads joystick analog values, formats them into a data packet, and sends it via the NRF24 module.  
-The receiver reads the packet and converts the values into PWM signals for controlling the servos.
-
----
-
 ## 🧠 Learnings
 This project taught me about:
 - Reliable **SPI communication** between ESP32 and RF modules.
