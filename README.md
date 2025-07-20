@@ -108,8 +108,3 @@ In **Part 2**, I’ll share:
 - A **custom PCB design** (using EasyEDA).  
 - A **demo video** with servo response.  
 - Possibly an **upgrade to ELRS** modules for longer range.  
-
----
-
-## 🔖 Tags / Keywords
-ESP32, NRF24L01+, RC Transmitter, RC Receiver, Servo Control, IoT, Wireless Control, Robotics, DIY Electronics, Perfboard, LiPo Battery, TP4056, Capacitor Design, Custom RC Systems
