@@ -1,1 +1,42 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
 
+RF24 radio(5, 17);  // CE, CSN
+
+const byte address[6] = "00001";
+
+struct JoystickData {
+  int joy1X;
+  int joy1Y;
+  int joy2X;
+  int joy2Y;
+};
+
+JoystickData data;
+
+void setup() {
+  Serial.begin(115200);
+  radio.begin();
+  radio.setPALevel(RF24_PA_LOW);
+  radio.setDataRate(RF24_250KBPS);
+  radio.setChannel(108);
+  radio.openWritingPipe(address);
+  radio.stopListening();
+
+  // Joystick pins
+  pinMode(32, INPUT); // Joystick 1 X
+  pinMode(33, INPUT); // Joystick 1 Y
+  pinMode(34, INPUT); // Joystick 2 X
+  pinMode(35, INPUT); // Joystick 2 Y
+}
+
+void loop() {
+  data.joy1X = analogRead(32);
+  data.joy1Y = analogRead(33);
+  data.joy2X = analogRead(34);
+  data.joy2Y = analogRead(35);
+
+  radio.write(&data, sizeof(data));
+  delay(20);  // Optional for stability
+}
